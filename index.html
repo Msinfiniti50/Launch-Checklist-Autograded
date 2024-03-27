@@ -3,14 +3,12 @@
     <head>
         <title>Launch Checklist</title>
         <link rel = "stylesheet" type = "text/css" href = "styles.css" />
-        <script src = "scriptHelper.js"></script>
-        <script src = "script.js"></script>
-        <script src = "bundle.js"></script>
-    </head>
+       </head>
     <body>
         <h1>Launch Checklist Form</h1>
         <div id="missionTarget" data-testid="missionTarget">
-            <!-- Fetch some planetary data -->
+            <!--Fetchsomeplanetarydata-->
+          
         </div>  
         <div id="launchForm">
             <form data-testid="testForm">
@@ -18,13 +16,13 @@
                     <label>Pilot Name <input type="text" name="pilotName" id="pilotName"/></label>
                 </div>
                 <div class="formField">
-                    <label>Co-pilot Name <input type="text" name="copilotName"/></label>
+                    <label>Co-pilot Name <input type="text" name="copilotName" id="copilotName"/></label>
                 </div>
                 <div class="formField">
-                    <label>Fuel Level (L) <input type="text" name="fuelLevel"/></label> 
+                    <label>Fuel Level (L) <input type="text" name="fuelLevel" id="fuelLevel"/></label> 
                 </div>
                 <div class="formField">
-                    <label>Cargo Mass (kg) <input type="text" name="cargoMass"/></label>
+                    <label>Cargo Mass (kg) <input type="text" name="cargoMass" id="cargoMass"/></label>
                 </div>
                 <button id="formSubmit">Submit</button>
             </form>
@@ -35,10 +33,13 @@
                 <ol>
                     <li id="pilotStatus" data-testid="pilotStatus">Pilot Ready</li>
                     <li id="copilotStatus" data-testid="copilotStatus">Co-pilot Ready</li>
-                    <li id="fuelStatus" data-testid="fuelStatus">Fuel level high enough for launch</li>
-                    <li id="cargoStatus" data-testid="cargoStatus">Cargo mass low enough for launch</li>
+                    <li id="fuelStatus" data-testid="fuelStatus">Fuel level too low for launch</li>
+                    <li id="cargoStatus" data-testid="cargoStatus">Cargo mass too heavy for launch</li>
                 </ol>
             </div>
         </div>
+        <script type="module" src = "scriptHelper.js"></script>
+        <script type="module" src = "script.js"></script>
+        <script type="module" src = "bundle.js"></script>
     </body>
 </html>
