@@ -133,7 +133,7 @@ describe('Test student work on helper functions', () => {
       // Shuttle should be ready for launch, enough fuel and cargo
       studentFunctions.formSubmission(document, list, "Chris", "Bob", 10000, 1);
       expect(list).toBeVisible();
-      expect(h2).toHaveStyle({color: 'red'});
+      expect(h2).toHaveStyle({color: 'green'});
       expect(h2).toHaveTextContent("Shuttle is Ready for Launch");
       expect(pilotStatus).toHaveTextContent("Pilot Chris is ready for launch");
       expect(copilotStatus).toHaveTextContent("Co-pilot Bob is ready for launch");
@@ -168,3 +168,4 @@ describe('Test student work on helper functions', () => {
    });
 
 });
+
