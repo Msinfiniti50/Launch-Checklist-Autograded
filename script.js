@@ -1,6 +1,6 @@
 const {addDestinationInfo, formSubmission, myFetch, pickplanet} = require("./scriptHelper.js");
 window.addEventListener("load", function(event) {
-  let listedPlanetsResponse = myFetch('https://handlers.education.launchcode.org/static/planets.json');
+//   let listedPlanetsResponse = myFetch('https://handlers.education.launchcode.org/static/planets.json');
  listedPlanetsResponse.then((result)=> {
 let listedPlanets = result;
 let planet = pickPlanet(listedPlanets);
@@ -8,13 +8,16 @@ let planet = pickPlanet(listedPlanets);
 });
    const form = document.querySelector("form");
    const list = document.getElementById("faultyItems");
-    form.addEventListener("submit", function(event) {
+   list.style.visibility = "hidden";
+
+form.addEventListener("submit", function(event) {
    event.preventDefault(); 
    let pilotName = document.querySelector("input[name=pilotName]").value;
    let copilotName = document.querySelector("input[name=copilotName]").value;
-   let fuelLevel = document.querySelector("input[name=fuelLevel]").value;
-   let cargoLevel = document.querySelector("input[name=cargoLevel]").value;
+   let fuelLevel = Number(document.querySelector("input[name=fuelLevel]").value);
+   let cargoLevel = Number(document.querySelector("input[name=cargoMass]").value);
 
    formSubmission(document, list, pilotName, copilotName, fuelLevel, cargoLevel); 
+   
   });
 }); 

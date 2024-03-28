@@ -24,35 +24,61 @@ function addDestinationInfo( document, name, diameter, star, distance, moons, im
     }
 }
 
+function updateStatusElements(fuelMessage, cargoMessage, launchMessage, color) {
+    fuelStatus.innerHTML = fuelMessage;
+    cargoStatus.innerHTML = cargoMessage;
+    launchStatus.innerHTML = launchMessage;
+    launchStatus.style.color = color;
+}
+
+
  function formSubmission(document, list, pilotName, copilotName, fuelLevel, cargoLevel) {
-    let fuelStatus = document.getElementById("fuelStatus");
-    let launchStatus = document.getElementById("launchStatus");
     let pilotStatus = document.getElementById("pilotStatus");
     let copilotStatus = document.getElementById("copilotStatus");
+    let fuelStatus = document.getElementById("fuelStatus");
+    let cargoStatus = document.getElementById("cargoStatus");
+    let launchStatus = document.getElementById("launchStatus");
 
     let readyForLaunch = true;
-      if (validateInput(pilotName) === "Empty" || validateInput(copilotName) === "Empty" || validateInput(fuelLevel) !== "Empty" || validateInput(cargoLevel) !== "Empty") {
-    readyForLaunch = false;
-    console.log("All fields are required!");
-    }
-    if (validateInput(pilotName) !== "Empty") {
-    pilotStatus.innerHTML = `Pilot ${pilotName} is ready for launch`;
-    copilotStatus.innerHTML = `Co-pilot ${copilotName} is ready for launch`;
+      if (validateInput(pilotName) === "Empty" || validateInput(copilotName) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty") {
+        alert("All fields are required!");
+    } else if (validateInput(pilotName) === "Is a Number" || validateInput(copilotName) === "Is a Number" || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number") {
+        alert("Must be valid information for each field!");
     } else {
-    pilotStatus.innerHTML = "Pilot ready";
-    copilotStatus.innerHTML = "Co-pilot ready";
-    }
-    if (!readyForLaunch) {
-    list.style.visibility = "visible";    
-    launchStatus.innerHTML = "Shuttle Not Ready for Launch";
-    launchStatus.style.color = "red";
-} else {
-    list.style.visibility = 'hidden';
-    launchStatus.innerHTML = 'Shuttle is Ready for Launch';
-    launchStatus.style.color = 'green';
-   }
- }
+        list.style.visibility = "visible";
+        pilotStatus.innerHTML = `Pilot ${pilotName} is ready for launch`;
+        copilotStatus.innerHTML = `Co-pilot ${copilotName} is ready for launch`;
+        launchStatus.style.color = "green";
+    
+   if (fuelLevel <= 10000 && cargoLevel <= 10000) {
+        fuelStatus.innerHTML = "Fuel level too low for launch";
+        cargoStatus.innerHTML = "Cargo mass low enough for launch";
+        launchStatus.innerHTML = "Shuttle Not Ready for Launch";
+        launchStatus.style.color = "red";
+    } else if (fuelLevel >= 10000 && cargoLevel > 10000) {
+        fuelStatus.innerHTML = "Fuel level high enough for launch";
+        cargoStatus.innerHTML = "Cargo mass too heavy for launch";
+        launchStatus.innerHTML = "Shuttle Not Ready for Launch";
+        launchStatus.style.color = 'red';
+
+    } else if (fuelLevel < 10000 && cargoLevel > 10000) {
+        fuelStatus.innerHTML = "Fuel level too low for launch";
+        cargoStatus.innerHTML = "Cargo mass too heavy for launch";
+        launchStatus.innerHTML = "Shuttle Not Ready for Launch";
+        launchStatus.style.color = 'red';
+
+    } else if(readyForLaunch === true) {
+        console.log("shuttle should be ready");
+        fuelStatus.innerHTML = "Fuel level high enough for launch";
+        cargoStatus.innerHTML = "Cargo mass low enough for launch";
+        launchStatus.innerHTML = "Shuttle is Ready for Launch";
+        launchStatus.style.color = 'green';
+    }  
         
+    }
+    
+   }
+     
 
  async function myFetch() {
     let planetsReturned;
@@ -71,6 +97,4 @@ module.exports.addDestinationInfo = addDestinationInfo;
 module.exports.validateInput = validateInput;
 module.exports.formSubmission = formSubmission;
 module.exports.pickPlanet = pickPlanet; 
-module.exports.myFetch = myFetch;  
-
-
+module.exports.myFetch = myFetch;
